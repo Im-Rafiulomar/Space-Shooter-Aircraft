@@ -1,22 +1,32 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GameFrame extends JFrame {
-    JFrame frame;
-    JLabel label;
+public class GameFrame extends JPanel implements ActionListener {
+    Timer mainTimer;
+    Player player;
+
     public GameFrame() {
-        frame = new JFrame("Space AirCraft");
-        label = new JLabel("This text is for test only");
+        setFocusable(true);
 
 
+        player = new Player(500, 500);
+        addKeyListener(new KeyAdapt(player));
 
-//        Start Frame adding section
-            frame.add(label);
-//        End Frame adding section
+        mainTimer = new Timer(10, this);
+        mainTimer.start();
+    }
 
-        frame.setSize(new Dimension(700, 700));
-        frame.setLocationRelativeTo(null); // centered relative to the screen
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true); // This should be at the end of frame.
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
+        player.draw(g2d);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        player.update();
+        repaint();
     }
 }
