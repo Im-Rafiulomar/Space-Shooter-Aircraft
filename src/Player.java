@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Player extends Entity {
 
     int velX = 0, velY = 0;
+    int speed = 6;
     public Player(int x, int y) {
         super(x, y);
     }
@@ -12,14 +14,17 @@ public class Player extends Entity {
     public void update() {
         y += velY;
         x += velX;
+
+        checkCollision();
     }
 
     public void draw(Graphics2D g2d) {
         g2d.drawImage(getPlayerImg(), x, y, null);
+        g2d.draw(getBounds());
     }
 
     public Image getPlayerImg() {
-        ImageIcon ic = new ImageIcon("./src/resources/player3.png");
+        ImageIcon ic = new ImageIcon("./src/resources/player1.png");
         return ic.getImage();
     }
 
@@ -27,13 +32,13 @@ public class Player extends Entity {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_W) {
-            velY = -5;
+            velY = -speed;
         } else if (key == KeyEvent.VK_S) {
-            velY = 5;
+            velY = speed;
         } else if (key == KeyEvent.VK_A) {
-            velX = -5;
+            velX = -speed;
         } else if (key == KeyEvent.VK_D) {
-            velX = 5;
+            velX = speed;
         }
     }
 
@@ -49,5 +54,20 @@ public class Player extends Entity {
         } else if (key == KeyEvent.VK_D) {
             velX = 0;
         }
+    }
+
+    public void checkCollision() {
+        ArrayList<Enemy> enemies = GameFrame.getEnemeyList();
+
+        for(int i = 0; i < enemies.size(); i++) {
+            Enemy tempEnemy = enemies.get(i);
+            if(getBounds().intersects(enemies.get(i).getBounds())) {
+                    GameFrame.removeEnemy(tempEnemy);
+            }
+        }
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, getPlayerImg().getWidth(null), getPlayerImg().getHeight(null));
     }
 }

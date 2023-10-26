@@ -8,12 +8,8 @@ public class Entity {
         this.y = y;
     }
 
-    public void update() {
+    public void update() {}
 
-    }
-
-    public void draw(Graphics2D g2d) {
-
-    }
+    public void draw(Graphics2D g2d) {}
 
 }
