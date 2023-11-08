@@ -64,7 +64,8 @@ public class Player extends Entity {
         for(int i = 0; i < enemies.size(); i++) {
             Enemy tempEnemy = enemies.get(i);
             if(getBounds().intersects(enemies.get(i).getBounds())) {
-                    System.exit(0);
+                JOptionPane.showMessageDialog(null, "You died on level " + GameFrame.level + "try better next time");
+                System.exit(0);
             }
         }
     }

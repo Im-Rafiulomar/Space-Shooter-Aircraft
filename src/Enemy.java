@@ -3,13 +3,17 @@ import java.awt.*;
 
 public class Enemy extends Entity{
 
+    private int startY;
+
     public Enemy(int x, int y) {
         super(x, y);
+        startY = y;
     }
 
     public void update() {
         y += 1;
         checkCollisions();
+        checkOffScreen();
     }
     public void draw(Graphics2D g2d) {
         g2d.drawImage(getEnemyImg(), x, y,null);
@@ -28,6 +32,12 @@ public class Enemy extends Entity{
                 GameFrame.removeEnemy(this);
                 GameFrame.removeMissile(m);
             }
+        }
+    }
+
+    public void checkOffScreen() {
+        if(y >= 680) {
+            y = startY;
         }
     }
 

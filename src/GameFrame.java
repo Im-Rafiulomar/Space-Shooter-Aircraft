@@ -9,7 +9,7 @@ public class GameFrame extends JPanel implements ActionListener {
     Timer mainTimer;
     Player player;
     int enemyCount = 5;
-    int level = 1;
+    public static int level = 1;
 
 
     static ArrayList<Enemy> enemies = new ArrayList<>();
@@ -35,6 +35,11 @@ public class GameFrame extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
+
+        ImageIcon ic = new ImageIcon("./src/resources/background.png");
+        g2d.drawImage(ic.getImage(), 0,0, null);
+
+
         player.draw(g2d);
 
         for(int i = 0; i < enemies.size(); i++) {
@@ -46,6 +51,8 @@ public class GameFrame extends JPanel implements ActionListener {
             Missile m = missiles.get(i);
             m.draw(g2d);
         }
+
+
     }
 
     @Override
@@ -59,6 +66,8 @@ public class GameFrame extends JPanel implements ActionListener {
             Missile m = missiles.get(i);
             m.update();
         }
+
+        checkEnd();
 
         repaint();
     }
@@ -96,6 +105,16 @@ public class GameFrame extends JPanel implements ActionListener {
         enemyCount = level * 5;
         for(int i = 0; i < enemyCount; i++) {
             addEnemy(new Enemy(rand.nextInt(500), -10 + - rand.nextInt(600)));
+        }
+    }
+
+    public void checkEnd() {
+        if(enemies.size() == 0) {
+            level++;
+            enemies.clear();
+            missiles.clear();
+            JOptionPane.showMessageDialog(null,"Good work, you completed level : " + (level - 1));
+            startGame();
         }
     }
 }
