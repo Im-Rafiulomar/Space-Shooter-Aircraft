@@ -39,6 +39,8 @@ public class Player extends Entity {
             velX = -speed;
         } else if (key == KeyEvent.VK_D) {
             velX = speed;
+        } else if (key == KeyEvent.VK_SPACE) {
+            GameFrame.addMissile(new Missile(x, y));
         }
     }
 
@@ -62,7 +64,7 @@ public class Player extends Entity {
         for(int i = 0; i < enemies.size(); i++) {
             Enemy tempEnemy = enemies.get(i);
             if(getBounds().intersects(enemies.get(i).getBounds())) {
-                    GameFrame.removeEnemy(tempEnemy);
+                    System.exit(0);
             }
         }
     }
