@@ -1,5 +1,7 @@
 package MainGame;
 
+import Settings.Settings;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -29,7 +31,7 @@ public class Player extends Entity {
     }
 
     public Image getPlayerImg() {
-        ImageIcon ic = new ImageIcon("./src/resources/player1.png");
+        ImageIcon ic = new ImageIcon("./src/resources/" + Settings.selectPlayer + ".png");
         return ic.getImage();
     }
 
@@ -46,7 +48,9 @@ public class Player extends Entity {
             velocityX = speed;
         } else if (key == KeyEvent.VK_SPACE) {
             Missile missile = new Missile(x, y);
-            Sound.missileSound();
+            if(Settings.soundOn) {
+                Sound.missileSound();
+            }
             GameFrame.addMissile(missile);
         }
     }
@@ -73,6 +77,10 @@ public class Player extends Entity {
             if(getBounds().intersects(tempEnemy.getBounds())) {
                 Score.gameOver = true;
                 GameFrame.mainTimer.stop();
+                if(Settings.musicOn) {
+                    Sound.clipMusic.stop();
+                }
+
                 JOptionPane.showMessageDialog(null, "You died on level " + GameFrame.level + " ,try better next time");
             }
         }

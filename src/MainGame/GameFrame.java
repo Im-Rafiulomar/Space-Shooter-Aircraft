@@ -1,5 +1,7 @@
 package MainGame;
 
+import Settings.Settings;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,6 +29,10 @@ public class GameFrame extends JPanel implements ActionListener {
         mainTimer.start();
 
         startGame();
+
+        if(Settings.musicOn) {
+            Sound.playMusic();
+        }
     }
 
     public static void addEnemy(Enemy e) {

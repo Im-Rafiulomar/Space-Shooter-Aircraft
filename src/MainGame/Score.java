@@ -15,7 +15,7 @@ public class Score {
     public void draw(Graphics2D g2d) {
         g2d.setFont(new Font("Arial", Font.PLAIN, 20));
         g2d.setColor(Color.GREEN);
-        g2d.drawString("MainGame.Score: " + score, 10, 20);
+        g2d.drawString("Score: " + score, 10, 20);
         g2d.drawString("HighScore: " + highScore, 110, 20);
         g2d.drawString("Level: " + GameFrame.level, 260, 20);
         g2d.drawString("Controls: W,A,A,D,Space ", 350, 20);

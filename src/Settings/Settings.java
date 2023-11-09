@@ -8,14 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Settings extends JFrame implements SettingsUtility, ActionListener{
-    final static int PLAYER1 = 0;
-    final static int PLAYER2 = 1;
-    final static int PLAYER3 = 2;
+public class Settings extends JFrame implements SettingsUtility, ActionListener {
+    static final String PLAYER1 = "Player 1";
+    final static String PLAYER2 = "Player 2";
+    final static String PLAYER3 = "Player 3";
 
     public static boolean soundOn = true;
     public static boolean musicOn = false;
-    public static int selectPlayer = PLAYER1;
+    public static String  selectPlayer;
 
     JLabel title, nameLabel, playerLabel, soundLabel, musicLabel;
     JTextField nameField;
@@ -27,11 +27,11 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener{
 
     public Settings() {
         setSize(500, 500);
-        setTitle("Game Settings.Settings");
+        setTitle("Game Settings");
         setLayout(null);
         setLocationRelativeTo(null);
 
-        title = new JLabel("Space MainGame.AirCraft");
+        title = new JLabel("Space AirCraft");
         title.setFont(new Font("Roboto", Font.PLAIN, 24));
         title.setBounds(150, 10, 200, 30);
 
@@ -40,13 +40,13 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener{
         nameField = new JTextField();
         nameField.setBounds(160, 70, 200, 30);
 
-        playerLabel = new JLabel("Select MainGame.Player:");
+        playerLabel = new JLabel("Select Player:");
         playerLabel.setBounds(50, 120, 100, 30);
-        String[] players = {"MainGame.Player 1", "MainGame.Player 2", "MainGame.Player 3"};
+        String[] players = {"Player 1", "Player 2", "Player 3"};
         playerComboBox = new JComboBox<>(players);
         playerComboBox.setBounds(160, 120, 200, 30);
 
-        soundLabel = new JLabel("MainGame.Sound:");
+        soundLabel = new JLabel("Sound:");
         soundLabel.setBounds(50, 170, 100, 30);
         soundOnRadioButton = new JRadioButton("On");
         soundOnRadioButton.setBounds(160, 170, 50, 30);
@@ -115,11 +115,11 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener{
 
     @Override
     public void setPlayer(String player) {
-        if(Objects.equals(player, "MainGame.Player 1")) {
+        if(Objects.equals(player, "Player 1")) {
             selectPlayer = PLAYER1;
-        } else if (Objects.equals(player, "MainGame.Player 2")) {
+        } else if (Objects.equals(player, "Player 2")) {
             selectPlayer = PLAYER2;
-        } else if (Objects.equals(player, "MainGame.Player 3")) {
+        } else if (Objects.equals(player, "Player 3")) {
             selectPlayer = PLAYER3;
         }
     }
@@ -149,13 +149,13 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener{
         if(e.getSource() == startGameButton) {
             try {
                 String name = nameField.getText();
-                String player = (String) playerComboBox.getSelectedItem();
+                String selectedPlayer = (String) playerComboBox.getSelectedItem();
                 String soundOption = soundOnRadioButton.isSelected() ? "On" : "Off";
                 String musicOption = musicOnRadioButton.isSelected() ? "On" : "Off";
                 if(Objects.equals(name, "")) {
                     throw new NameBlankException("Name cannot be empty!");
                 } else {
-                    setPlayer(player);
+                    setPlayer(selectedPlayer);
                     musicOn(musicOption);
                     soundOn(soundOption);
                     System.out.println( name + " " + selectPlayer + " " + soundOn + " " + musicOn);
@@ -170,10 +170,5 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener{
         } else if ( e.getSource() == seeScoresButton) {
             showScores(); // Show all the MainGame.Score
         }
-    }
-
-
-    public static void main(String[] args) {
-        new Settings();
     }
 }

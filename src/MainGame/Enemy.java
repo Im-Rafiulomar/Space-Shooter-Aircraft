@@ -1,5 +1,7 @@
 package MainGame;
 
+import Settings.Settings;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -33,7 +35,9 @@ public class Enemy extends Entity {
             if(getBounds().intersects(m.getBounds())) {
                 GameFrame.removeEnemy(this);
                 GameFrame.removeMissile(m);
-                Sound.destroySound();
+                if(Settings.soundOn) {
+                    Sound.destroySound();
+                }
                 GameFrame.score.update();
             }
         }

@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class AirCraft extends JFrame {
     public AirCraft() {
-        setTitle("Space MainGame.AirCraft");
+        setTitle("Space AirCraft");
         setSize(600,600);
         setResizable(false);
         setLocationRelativeTo(null);
