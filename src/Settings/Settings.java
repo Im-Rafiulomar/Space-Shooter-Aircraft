@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Settings extends JFrame implements SettingsUtility, ActionListener {
+
     static final String PLAYER1 = "Player 1";
     final static String PLAYER2 = "Player 2";
     final static String PLAYER3 = "Player 3";
@@ -158,8 +159,6 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
                     setPlayer(selectedPlayer);
                     musicOn(musicOption);
                     soundOn(soundOption);
-                    System.out.println( name + " " + selectPlayer + " " + soundOn + " " + musicOn);
-
                     startGame(); // Start the game
                 }
             } catch (NameBlankException err) {
@@ -167,8 +166,9 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
             } catch (Exception err) {
                 System.out.println("Other error!");
             }
-        } else if ( e.getSource() == seeScoresButton) {
+        } else if (e.getSource() == seeScoresButton) {
             showScores(); // Show all the MainGame.Score
         }
     }
+
 }

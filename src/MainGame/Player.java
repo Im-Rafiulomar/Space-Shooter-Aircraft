@@ -1,6 +1,6 @@
 package MainGame;
 
-import Settings.Settings;
+import Settings.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class Player extends Entity {
+
+    public static int ESCAPE_KEY_COUNTER = 0;
     int velocityX = 0, velocityY = 0;
     int speed = 5;
 
@@ -52,6 +54,13 @@ public class Player extends Entity {
                 Sound.missileSound();
             }
             GameFrame.addMissile(missile);
+        } else if (key == KeyEvent.VK_ESCAPE) {
+            ESCAPE_KEY_COUNTER++;
+            if(ESCAPE_KEY_COUNTER % 2 == 1) {
+                GameFrame.mainTimer.stop();
+            } else {
+                GameFrame.mainTimer.start();
+            }
         }
     }
 

@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class Missile extends Entity {
 
-
     public Missile(int x, int y) {
         super(x, y);
     }
@@ -27,5 +26,4 @@ public class Missile extends Entity {
     public Rectangle getBounds() {
         return new Rectangle(x, y, getMissileImg().getWidth(null), getMissileImg().getHeight(null));
     }
-
 }

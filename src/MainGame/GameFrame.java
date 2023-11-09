@@ -1,7 +1,6 @@
 package MainGame;
 
-import Settings.Settings;
-
+import Settings.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
