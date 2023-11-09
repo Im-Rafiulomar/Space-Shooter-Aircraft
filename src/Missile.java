@@ -1,5 +1,9 @@
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Missile extends Entity{
 
@@ -13,7 +17,7 @@ public class Missile extends Entity{
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(getMissileImg(), x + 20, y, null);
+        g2d.drawImage(getMissileImg(), x + 5, y, null);
     }
 
     public Image getMissileImg() {
@@ -24,4 +28,5 @@ public class Missile extends Entity{
     public Rectangle getBounds() {
         return new Rectangle(x, y, getMissileImg().getWidth(null), getMissileImg().getHeight(null));
     }
+
 }

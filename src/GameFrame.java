@@ -3,79 +3,31 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameFrame extends JPanel implements ActionListener {
+
     Timer mainTimer;
     Player player;
+    public static ArrayList<Enemy> enemies = new ArrayList<>();
+    static ArrayList<Missile> missiles = new ArrayList<>();
     int enemyCount = 5;
     public static int level = 1;
-
-
-    static ArrayList<Enemy> enemies = new ArrayList<>();
-    static ArrayList<Missile> missiles = new ArrayList<>();
-    Random rand = new Random();
-
-
-
+    public static Score score;
     public GameFrame() {
         setFocusable(true);
-
-
-        player = new Player(230, 530);
+        player = new Player(300,500);
+        score = new Score();
         addKeyListener(new KeyAdapt(player));
 
         mainTimer = new Timer(10, this);
         mainTimer.start();
 
         startGame();
-
-    }
-
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
-
-        ImageIcon ic = new ImageIcon("./src/resources/background.png");
-        g2d.drawImage(ic.getImage(), 0,0, null);
-
-
-        player.draw(g2d);
-
-        for(int i = 0; i < enemies.size(); i++) {
-            Enemy tempEnemy = enemies.get(i);
-            tempEnemy.draw(g2d);
-        }
-
-        for(int i = 0; i < missiles.size(); i++) {
-            Missile m = missiles.get(i);
-            m.draw(g2d);
-        }
-
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        player.update();
-        for(int i = 0; i < enemies.size(); i++) {
-            Enemy tempEnemy = enemies.get(i);
-            tempEnemy.update();
-        }
-        for(int i = 0; i < missiles.size(); i++) {
-            Missile m = missiles.get(i);
-            m.update();
-        }
-
-        checkEnd();
-
-        repaint();
     }
 
     public static void addEnemy(Enemy e) {
         enemies.add(e);
     }
-
 
     public static void removeEnemy(Enemy e) {
         enemies.remove(e);
@@ -85,7 +37,6 @@ public class GameFrame extends JPanel implements ActionListener {
         return enemies;
     }
 
-//
     public static void addMissile(Missile e) {
         missiles.add(e);
     }
@@ -100,18 +51,58 @@ public class GameFrame extends JPanel implements ActionListener {
     }
 
 
+    public void paint(Graphics g) {
+        super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
+        ImageIcon ic = new ImageIcon("./src/resources/background.jpg");
+        g2d.drawImage(ic.getImage(), 0,0, null);
+
+        score.draw(g2d);
+        player.draw(g2d);
+
+        for(int i = 0; i < enemies.size(); i++) {
+            Enemy tempEnemy = enemies.get(i);
+            tempEnemy.draw(g2d);
+        }
+
+        for(int i = 0; i < missiles.size(); i++) {
+            Missile m = missiles.get(i);
+            m.draw(g2d);
+        }
+    }
 
     public void startGame() {
         enemyCount = level * 5;
         for(int i = 0; i < enemyCount; i++) {
-            addEnemy(new Enemy(rand.nextInt(500), -10 + - rand.nextInt(600)));
+            int min_width = 50;
+            int max_width = 500;
+            int min_hight = 0;
+            int max_hight = 350;
+            addEnemy(new Enemy(min_width + (int)(Math.random() * (max_width - min_width + 1)),  min_hight + (int)(Math.random() * (max_hight - min_hight + 1))));
         }
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        player.update();
+
+        for(int i = 0; i < enemies.size(); i++) {
+            Enemy tempEnemy = enemies.get(i);
+            tempEnemy.update();
+        }
+
+        for(int i = 0; i < missiles.size(); i++) {
+            Missile m = missiles.get(i);
+            m.update();
+        }
+
+        checkEnd();
+        repaint();
+    }
+
     public void checkEnd() {
-        if(enemies.size() == 0) {
+        if(enemies.isEmpty()) {
             level++;
-            enemies.clear();
             missiles.clear();
             JOptionPane.showMessageDialog(null,"Good work, you completed level : " + (level - 1));
             startGame();

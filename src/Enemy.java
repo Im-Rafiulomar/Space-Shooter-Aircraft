@@ -1,10 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Enemy extends Entity{
+public class Enemy extends Entity {
 
     private int startY;
-
     public Enemy(int x, int y) {
         super(x, y);
         startY = y;
@@ -12,16 +11,17 @@ public class Enemy extends Entity{
 
     public void update() {
         y += 1;
-        checkCollisions();
         checkOffScreen();
+        checkCollisions();
     }
+
     public void draw(Graphics2D g2d) {
         g2d.drawImage(getEnemyImg(), x, y,null);
-        g2d.draw(getBounds());
+//        g2d.draw(getBounds());
     }
 
     public Image getEnemyImg() {
-        ImageIcon ic = new ImageIcon("./src/resources/player4.png");
+        ImageIcon ic = new ImageIcon("./src/resources/enemy.png");
         return ic.getImage();
     }
 
@@ -31,12 +31,14 @@ public class Enemy extends Entity{
             if(getBounds().intersects(m.getBounds())) {
                 GameFrame.removeEnemy(this);
                 GameFrame.removeMissile(m);
+                Sound.destroySound();
+                GameFrame.score.update();
             }
         }
     }
 
     public void checkOffScreen() {
-        if(y >= 680) {
+        if(y >= 610) {
             y = startY;
         }
     }
