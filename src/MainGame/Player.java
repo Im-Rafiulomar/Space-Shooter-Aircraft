@@ -1,3 +1,5 @@
+package MainGame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -23,7 +25,7 @@ public class Player extends Entity {
 
     public void draw(Graphics2D g2d) {
         g2d.drawImage(getPlayerImg(), x, y, null);
-//        g2d.draw(getBounds());
+//        g2d.draw(getBounds()); // For view the boundaries of the players
     }
 
     public Image getPlayerImg() {
@@ -68,9 +70,10 @@ public class Player extends Entity {
 
         for(int i = 0; i < enemies.size(); i++) {
             Enemy tempEnemy = enemies.get(i);
-            if(getBounds().intersects(enemies.get(i).getBounds())) {
+            if(getBounds().intersects(tempEnemy.getBounds())) {
+                Score.gameOver = true;
+                GameFrame.mainTimer.stop();
                 JOptionPane.showMessageDialog(null, "You died on level " + GameFrame.level + " ,try better next time");
-                System.exit(0);
             }
         }
     }
@@ -80,16 +83,16 @@ public class Player extends Entity {
             x = 0;
         }
 
-        if( x > 600) {
-            x = 600;
+        else if(x >= 580 - getPlayerImg().getWidth(null)) {
+            x = 580 - getPlayerImg().getWidth(null);
         }
 
-        if(y < 0) {
+        else if(y < 0) {
             y = 0;
         }
 
-        if(y > 600) {
-            y = 600;
+        else if(y >= 580 - getPlayerImg().getHeight(null)) {
+            y = 580 - getPlayerImg().getHeight(null);
         }
     }
 

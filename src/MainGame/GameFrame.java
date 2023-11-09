@@ -1,3 +1,5 @@
+package MainGame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,17 +8,19 @@ import java.util.ArrayList;
 
 public class GameFrame extends JPanel implements ActionListener {
 
-    Timer mainTimer;
+   public static Timer mainTimer;
     Player player;
     public static ArrayList<Enemy> enemies = new ArrayList<>();
     static ArrayList<Missile> missiles = new ArrayList<>();
-    int enemyCount = 5;
+    int enemyCount = 20;
     public static int level = 1;
     public static Score score;
     public GameFrame() {
         setFocusable(true);
         player = new Player(300,500);
         score = new Score();
+        Score.gameOver = false;
+
         addKeyListener(new KeyAdapt(player));
 
         mainTimer = new Timer(10, this);

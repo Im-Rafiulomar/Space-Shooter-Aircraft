@@ -1,3 +1,5 @@
+package MainGame;
+
 import java.awt.*;
 
 public class Entity {
