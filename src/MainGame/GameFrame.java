@@ -147,13 +147,13 @@ public class GameFrame extends JPanel implements ActionListener {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         } finally {
             if (fileReader != null) {
                 try {
                     fileReader.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             }
         }
