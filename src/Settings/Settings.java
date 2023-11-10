@@ -39,6 +39,7 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
         setTitle("Game Settings");
         setLayout(null);
         setLocationRelativeTo(null);
+        setIconImage(new ImageIcon("./src/resources/settings.png").getImage());
 
         title = new JLabel("Space AirCraft");
         title.setFont(new Font("Roboto", Font.PLAIN, 24));
@@ -87,9 +88,9 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
         startGameButton.setBounds(190, 320, 120, 40);
         startGameButton.addActionListener(this);
 
-        lolMessage = new JLabel("Waiting for GTA 6. For now enjoy our AirCraft Game! 😉");
+        lolMessage = new JLabel("Waiting for GTA 6. For now enjoy our Space AirCraft Game! 😉");
         lolMessage.setFont(new Font("Roboto", Font.ITALIC, 16));
-        lolMessage.setBounds(50,400,600,50);
+        lolMessage.setBounds(20,400,600,50);
 
 
         soundOnRadioButton.setFocusable(false);
