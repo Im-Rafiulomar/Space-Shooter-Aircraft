@@ -26,7 +26,7 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
     public static boolean musicOn = false;
     public static String  selectPlayer;
 
-    JLabel title, nameLabel, playerLabel, soundLabel, musicLabel;
+    JLabel title, nameLabel, playerLabel, soundLabel, musicLabel, lolMessage;
     static JTextField nameField;
     JComboBox<String> playerComboBox;
     JRadioButton soundOnRadioButton, soundOffRadioButton;
@@ -87,6 +87,10 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
         startGameButton.setBounds(190, 320, 120, 40);
         startGameButton.addActionListener(this);
 
+        lolMessage = new JLabel("Waiting for GTA 6. For now enjoy our AirCraft Game! 😉");
+        lolMessage.setFont(new Font("Roboto", Font.ITALIC, 16));
+        lolMessage.setBounds(50,400,600,50);
+
 
         soundOnRadioButton.setFocusable(false);
         soundOffRadioButton.setFocusable(false);
@@ -108,6 +112,7 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
         add(musicOffRadioButton);
         add(seeScoresButton);
         add(startGameButton);
+        add(lolMessage);
 
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
