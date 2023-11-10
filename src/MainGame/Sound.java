@@ -58,7 +58,7 @@ public class Sound {
                 clipMusic.open(audioInputStream);
                 clipMusic.start();
             } else {
-                System.out.println("Cant find sound file");
+                System.out.println("Cant find music file");
             }
 
         } catch (Exception e) {

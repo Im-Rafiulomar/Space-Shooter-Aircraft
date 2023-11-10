@@ -1,14 +1,7 @@
 package Settings;
-
-import java.io.Serializable;
-
-public class Data implements Serializable {
+public class Data {
     private String name;
     private int score;
-
-    public Data(String name) {
-        this.name = name;
-    }
 
     public Data(String name, int score) {
         this.name = name;
@@ -30,4 +23,5 @@ public class Data implements Serializable {
     public void setScore(int score) {
         this.score = score;
     }
+
 }

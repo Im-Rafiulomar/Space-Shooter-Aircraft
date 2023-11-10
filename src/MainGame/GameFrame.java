@@ -5,14 +5,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 
 public class GameFrame extends JPanel implements ActionListener {
 
-   public static Timer mainTimer;
+    public static Timer mainTimer;
     Player player;
     public static ArrayList<Enemy> enemies = new ArrayList<>();
-    static ArrayList<Missile> missiles = new ArrayList<>();
+    public static ArrayList<Missile> missiles = new ArrayList<>();
+
     int enemyCount = 20;
     public static int level = 1;
     public static Score score;
@@ -21,6 +23,8 @@ public class GameFrame extends JPanel implements ActionListener {
         player = new Player(300,500);
         score = new Score();
         Score.gameOver = false;
+
+        Score.highScore = getMaxScore();
 
         addKeyListener(new KeyAdapt(player));
 
@@ -116,5 +120,44 @@ public class GameFrame extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null,"Good work, you completed level : " + (level - 1));
             startGame();
         }
+    }
+
+
+    public static int getMaxScore() {
+        File file = new File("./src/Settings/data.txt");
+
+        int maxScore = Integer.MIN_VALUE;
+        FileReader fileReader = null;
+
+        try {
+            BufferedReader bufferedReader;
+
+            fileReader = new FileReader(file);
+            bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length == 2) {
+                    int score = Integer.parseInt(parts[1]);
+
+                    if (score > maxScore) {
+                        maxScore = score;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return maxScore;
     }
 }

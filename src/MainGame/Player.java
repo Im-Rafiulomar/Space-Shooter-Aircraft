@@ -5,6 +5,9 @@ import Settings.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player extends Entity {
@@ -86,13 +89,23 @@ public class Player extends Entity {
             if(getBounds().intersects(tempEnemy.getBounds())) {
                 Score.gameOver = true;
                 GameFrame.mainTimer.stop();
+
                 if(Settings.musicOn) {
                     Sound.clipMusic.stop();
                 }
 
                 JOptionPane.showMessageDialog(null, "You died on level " + GameFrame.level + " ,try better next time");
+
+                File file = new File("./src/Settings/data.txt");
+                try (FileWriter fileWriter = new FileWriter(file, true);) {
+                    fileWriter.write(Settings.name + " " + Score.score+"\n");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+
+
     }
 
     public void checkOffScreen() {

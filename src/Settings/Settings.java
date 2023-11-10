@@ -2,14 +2,22 @@ package Settings;
 
 import MainGame.AirCraft;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
+
 
 public class Settings extends JFrame implements SettingsUtility, ActionListener {
 
+    public static String name;
+    private final ArrayList<Data> dataList = new ArrayList<>();
     static final String PLAYER1 = "Player 1";
     final static String PLAYER2 = "Player 2";
     final static String PLAYER3 = "Player 3";
@@ -19,7 +27,7 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
     public static String  selectPlayer;
 
     JLabel title, nameLabel, playerLabel, soundLabel, musicLabel;
-    JTextField nameField;
+    static JTextField nameField;
     JComboBox<String> playerComboBox;
     JRadioButton soundOnRadioButton, soundOffRadioButton;
     JRadioButton musicOnRadioButton, musicOffRadioButton;
@@ -107,8 +115,10 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
     }
 
     private void showScores() {
-        JOptionPane.showMessageDialog(this, "Scores Button Clicked!");
+        viewdata();
+        new DataWindow(dataList);
     }
+
     private void startGame() {
         new AirCraft();
     }
@@ -159,16 +169,36 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
                     setPlayer(selectedPlayer);
                     musicOn(musicOption);
                     soundOn(soundOption);
-                    startGame(); // Start the game
+                    Settings.name = name;
+                    startGame();
                 }
             } catch (NameBlankException err) {
                 JOptionPane.showMessageDialog(this, err);
             } catch (Exception err) {
-                System.out.println("Other error!");
+                System.out.println(err.getMessage());
             }
         } else if (e.getSource() == seeScoresButton) {
-            showScores(); // Show all the MainGame.Score
+            showScores();
         }
     }
 
+
+    public void viewdata() {
+        String filePath = "./src/Settings/data.txt";
+        dataList.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length == 2) {
+                    String name = parts[0];
+                    int score = Integer.parseInt(parts[1]);
+                    Data data = new Data(name, score);
+                    dataList.add(data);
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading file: " + e.getMessage());
+        }
+    }
 }

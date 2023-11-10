@@ -1,7 +1,5 @@
 package MainGame;
 
-import Settings.SaveScores;
-
 import java.awt.*;
 
 public class Score {
@@ -27,6 +25,5 @@ public class Score {
             g2d.drawString("Game Over!", 250, 300);
         }
     }
-
 
 }
