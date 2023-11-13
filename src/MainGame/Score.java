@@ -18,7 +18,7 @@ public class Score {
         g2d.drawString("Score: " + score, 10, 20);
         g2d.drawString("HighScore: " + highScore, 110, 20);
         g2d.drawString("Level: " + GameFrame.level, 260, 20);
-        g2d.drawString("Controls: W,A,A,D,Space ", 350, 20);
+        g2d.drawString("Controls: W,A,S,D,Space ", 350, 20);
         g2d.drawString("Game pause: ESC ", 350, 40);
 
         if(gameOver) {

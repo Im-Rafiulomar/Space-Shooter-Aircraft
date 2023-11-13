@@ -1,1 +1,3 @@
 system 0
+Omar 40
+ok 94

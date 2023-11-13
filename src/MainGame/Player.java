@@ -43,13 +43,13 @@ public class Player extends Entity {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
-        if(key == KeyEvent.VK_W) {
+        if(key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
             velocityY = -speed;
-        } else if (key == KeyEvent.VK_S) {
+        } else if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
             velocityY = speed;
-        } else if (key == KeyEvent.VK_A) {
+        } else if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
             velocityX = -speed;
-        } else if (key == KeyEvent.VK_D) {
+        } else if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
             velocityX = speed;
         } else if (key == KeyEvent.VK_SPACE) {
             Missile missile = new Missile(x, y);
@@ -70,16 +70,17 @@ public class Player extends Entity {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
 
-        if(key == KeyEvent.VK_W) {
+        if(key == KeyEvent.VK_W || key == KeyEvent.VK_UP) {
             velocityY = 0;
-        } else if (key == KeyEvent.VK_S) {
+        } else if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) {
             velocityY = 0;
-        } else if (key == KeyEvent.VK_A) {
+        } else if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) {
             velocityX = 0;
-        } else if (key == KeyEvent.VK_D) {
+        } else if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) {
             velocityX = 0;
         }
     }
+
 
     public void checkCollision() {
         ArrayList<Enemy> enemies = GameFrame.getEnemeyList();

@@ -10,7 +10,7 @@ public class AirCraft extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         add(new GameFrame());
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 

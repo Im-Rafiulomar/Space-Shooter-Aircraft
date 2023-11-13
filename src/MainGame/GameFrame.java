@@ -15,7 +15,7 @@ public class GameFrame extends JPanel implements ActionListener {
     public static ArrayList<Enemy> enemies = new ArrayList<>();
     public static ArrayList<Missile> missiles = new ArrayList<>();
 
-    int enemyCount = 20;
+    int enemyCount;
     public static int level = 1;
     public static Score score;
     public GameFrame() {

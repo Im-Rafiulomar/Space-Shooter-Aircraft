@@ -179,7 +179,7 @@ public class Settings extends JFrame implements SettingsUtility, ActionListener 
                     startGame();
                 }
             } catch (NameBlankException err) {
-                JOptionPane.showMessageDialog(this, err);
+                JOptionPane.showMessageDialog(this, err.getMessage());
             } catch (Exception err) {
                 System.out.println(err.getMessage());
             }
