@@ -11,11 +11,6 @@ A Space aircraft game built by Java Swing, with OOP
 **Database:** Java File
 
 
-## Contributor
-
-- [@Rafiul Omar](https://github.com/Rafiul-Omar2022)
-
-
 ## Project Description
 
 To run this project, you will need to exicute execute the Java `jre` file
